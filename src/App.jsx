@@ -9,6 +9,7 @@ import Projects from "./components/Projects";
 import { Route, Routes } from "react-router-dom";
 import HelmetSEO from "./lib/helmet";
 import { HelmetProvider } from "react-helmet-async";
+import NotFound from "./components/NotFound";
 
 export default function App() {
   const [isOnePage, setIsOnePage] = useState(false);
@@ -16,7 +17,6 @@ export default function App() {
   return (
     <>
       <HelmetProvider>
-        <HelmetSEO />
         <Header />
         {isOnePage ? (
           <>
@@ -32,6 +32,7 @@ export default function App() {
             <Route path="/experience" element={<Experience />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         )}
       </HelmetProvider>

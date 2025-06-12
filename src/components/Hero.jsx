@@ -6,6 +6,8 @@ import Meteors from "./ui/meteors";
 import PortfolioPage from "./PortfolioPage";
 import SparklesText from "./ui/sparkles-text";
 import { FlipWords } from "./ui/flip-words";
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
 // AnimatedGrid Component
 const AnimatedGrid = () => {
@@ -76,8 +78,16 @@ const profile = {
     Prism.highlightAll();
   }, [code]);
 
+  const location = useLocation();
+
   return (
     <>
+      <Helmet>
+        <title>Mohammad Sajib | MERN Stack Developer from Khagrachari</title>
+        <meta name="description" content="MERN Stack Developer from Khagrachari. I specialize in building full-stack web applications using React, Node.js, Express, and MongoDB." />
+        <meta name="keywords" content="Mohammad Sajib, Khagrachari Developer, MERN stack, React, Node.js, Full-stack developer" />
+        <link rel="canonical" href={`https://sajib.xyz${location.pathname}`} />
+      </Helmet>
       <main className="pt-20 lg:pt-[0rem] bg-[#0f1629] text-white min-h-screen">
         <section className="hero min-h-screen flex items-center relative px-4 sm:px-6 lg:px-8">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>

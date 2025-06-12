@@ -1,5 +1,7 @@
 import React from "react";
-import { Code2, Layers, Network,Cpu } from "lucide-react";
+import { Code2, Layers, Network, Cpu } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
 const ExperienceCard = ({
   title,
@@ -69,7 +71,7 @@ const ExperienceSection = () => {
       period: "2023 - 2024",
       description:
         "Gained in-depth knowledge of frontend development concepts, including responsive, mobile-first design and interactive features. Applied logic and best practices using React and Tailwind CSS for building efficient, user-friendly interfaces.",
-    },    
+    },
     {
       icon: Cpu,
       title: "Linux System Administrator",
@@ -78,11 +80,19 @@ const ExperienceSection = () => {
       description:
         "Worked with Linux systems to manage servers, deploy applications, and ensure optimal system performance. Gained expertise in shell scripting, system monitoring, and troubleshooting. Emphasized automation, security, and efficient use of resources for both development and production environments.",
     }
-    
+
   ];
+
+  const location = useLocation();
 
   return (
     <>
+      <Helmet>
+        <title>Experience – Mohammad Sajib | Backend & Full-Stack Projects</title>
+        <meta name="description" content="See Mohammad Sajib's professional and freelance experience as a Node.js backend and MERN stack developer." />
+        <meta name="keywords" content="Backend experience, freelance developer, Node.js, full-stack, project portfolio, Sajib" />
+        <link rel="canonical" href={`https://sajib.xyz${location.pathname}`} />
+      </Helmet>
       <div className="min-h-screen bg-gray-900 relative overflow-hidden">
         {/* Animated background grid */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTAgMGg2MHY2MEgweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkQ0MjU2IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-10" />

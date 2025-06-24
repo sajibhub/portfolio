@@ -7,7 +7,6 @@ import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Projects from "./components/Projects";
 import { Route, Routes } from "react-router-dom";
-import HelmetSEO from "./lib/helmet";
 import { HelmetProvider } from "react-helmet-async";
 import NotFound from "./components/NotFound";
 

@@ -47,8 +47,10 @@ const SkillsSection = () => {
       color: "text-green-400",
       skills: [
         "Node.js",
+        "Express.js",
         "MongoDB",
         "REST APIs",
+        "Socket.io",
       ],
     },
 
@@ -79,7 +81,7 @@ const SkillsSection = () => {
       <Helmet>
         <title>Skills – Mohammad Sajib | JavaScript, React, Node.js Expert</title>
         <meta name="description" content="Discover the technical skills of Mohammad Sajib, including JavaScript, React, Express.js, MongoDB, and more." />
-        <meta name="keywords" content="JavaScript, React, Node.js, MongoDB, Express.js, MERN skills, Sajib skills" />
+        <meta name="keywords" content="JavaScript, React, Node.js, MongoDB, Express.js,Socket.io, socket, MERN skills, Sajib skills" />
         <link rel="canonical" href={`https://sajib.xyz${location.pathname}`} />
       </Helmet>
       <main className="pt-20 lg:pt-0 bg-[#0f1629] text-white min-h-screen">

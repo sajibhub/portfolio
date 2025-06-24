@@ -89,7 +89,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold">Location</h3>
-                      <p className="text-gray-400">Chittagong, Khagrachari</p>
+                      <p className="text-gray-400">Chittagong, Khagrachhri</p>
                     </div>
                   </div>
                 </div>

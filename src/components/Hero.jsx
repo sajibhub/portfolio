@@ -84,7 +84,7 @@ const profile = {
     <>
       <Helmet>
         <title>Mohammad Sajib | MERN Stack Developer from Khagrachari</title>
-        <meta name="description" content="MERN Stack Developer from Khagrachari. I specialize in building full-stack web applications using React, Node.js, Express, and MongoDB." />
+        <meta name="description" content="MERN Stack Developer from Khagrachhari. I specialize in building full-stack web applications using React, Node.js, Express, and MongoDB." />
         <meta name="keywords" content="Mohammad Sajib, Khagrachari Developer, MERN stack, React, Node.js, Full-stack developer" />
         <link rel="canonical" href={`https://sajib.xyz${location.pathname}`} />
       </Helmet>

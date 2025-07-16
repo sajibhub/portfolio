@@ -49,30 +49,32 @@ const AnimatedGrid = () => {
 
 export default function Hero() {
   const words = [
-    "Full-Stack Developer & Backend Specialist",
-    "MERN Stack Developer & Node.js Expert",
-    "Learning DevOps & Cloud Engineering",
+    "Backend Specialist & API Architect",
+    "Node.js & Express Aficionado",
+    "Passionate About Real-Time Apps & Scalable Backends",
     "Linux & GitHub Enthusiast",
   ];
 
   const [code] = useState(`
 const profile = {
     name: 'Mohammad Sajib',
-    title: 'Full-Stack Developer | Backend Specialist | DevOps Enthusiast',
+    title: 'Backend Specialist | Real-Time App Enthusiast',
     skills: [
-        'React', 'Node.js', 'Express', 'MongoDB', 
-        'Git', 'Redux', 
-        'Tailwind', 'REST API', 'Linux', 
+        'Node.js', 'Express', 'MongoDB',
+        'Mongoose', 'Firebase', 'Socket.IO',
+        'Git', 'Redux', 'Tailwind',
+        'REST API', 'Linux',
     ],
- 
+
     additionalInfo: {
-        currentFocus: 'Learning DevOps & Cloud Engineering',
-        passion: 'Building scalable backends and automating deployments',
-        goals: 'Contributing to open-source DevOps tools and frameworks',
-        motivation: 'Continuous learning and improving system reliability'
+        currentFocus: 'Building robust backend systems and real-time applications',
+        passion: 'Designing efficient APIs and integrating real-time communication',
+        goals: 'Developing impactful backend projects and contributing to open-source',
+        motivation: 'Creating seamless user experiences through reliable architectures'
     }
 };
   `);
+
 
   useEffect(() => {
     Prism.highlightAll();
@@ -166,7 +168,7 @@ const profile = {
 
                 {/* Contact Button */}
                 <a
-                  href="https://drive.google.com/uc?export=download&id=1E5cbOBKAhn-8s2ONGFc5HNJQn88xMnaW"
+                  href="https://drive.google.com/uc?export=download&id=1Q24F4GkZfuU88vzv4tRXRv8MwmcQHyqM"
                   className="group relative inline-flex items-center justify-center gap-3 p-0.5 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_2rem_-0.5rem_#60A5FA]"
                 >
                   <span className="block w-full px-6 sm:px-8 py-3 sm:py-4 rounded-[11px] bg-gray-900 border border-gray-700/50 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-gray-800 group-hover:to-gray-700">

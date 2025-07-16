@@ -1,9 +1,13 @@
-import React from "react";
 import { Github, ExternalLink } from "lucide-react";
-import socialApp from "../assets/images/social-media.png";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
+
+import socialApp from "../assets/images/social-media.png";
+import BkashMerchant from "../assets/images/bkash-merchant.png"
+import Weather from "../assets/images/weather.png"
+import TelegramBot from "../assets/images/telegram_bot.png"
+import SslCommerzImage from "../assets/images/sslcommerz.png";
 
 const MacOsButtons = () => (
   <div className="flex gap-2 mb-4">
@@ -15,7 +19,6 @@ const MacOsButtons = () => (
 
 const ProjectShowcase = () => {
   const projects = [
-
     {
       title: "SocialSphere - A Modern Social Media App",
       description:
@@ -28,7 +31,56 @@ const ProjectShowcase = () => {
       image: socialApp,
       featured: true,
     },
+    {
+      title: "bKash Merchant - Node.js & React Payment Integration",
+      description:
+        "bKash Merchant is a payment integration app using bKash API that allows merchants to handle payments securely and efficiently. Built with Node.js backend and React frontend to provide smooth transaction management.",
+      tags: ["React", "Node.js", "Express", "REST API"],
+      links: {
+        github: "https://github.com/SajibHub/bkash-merchant",
+        demo: "https://bkash-merchant-i3su.vercel.app/",
+      },
+      image: BkashMerchant,
+      featured: false,
+    },
+    {
+      title: "SSLCommerz Payment Gateway Integration",
+      description:
+        "A complete SSLCommerz sandbox integration using Node.js and Express with a clean HTML/CSS frontend. Users can enter an amount, choose from dynamic payment options (Visa, Mastercard, bKash, Nagad, etc.), and get real-time payment validation and feedback.",
+      tags: ["Node.js", "Express", "SSLCommerz", "HTML", "JavaScript"],
+      links: {
+        github: "https://github.com/SajibHub/sslcommerz", // Replace with your repo link
+        demo: "https://sslcommerz.sajib.xyz/"
+      },
+      image: SslCommerzImage, // Add your imported image for this project
+      featured: false
+    },
+    {
+      title: "WeatherApp - Real-time Weather Forecast",
+      description:
+        "WeatherApp provides accurate, real-time weather updates for any location. Built with React and styled with Tailwind CSS, it fetches data from external weather APIs to display current conditions and forecasts with a clean, responsive UI.",
+      tags: ["React", "Tailwind CSS", "API"],
+      links: {
+        github: "https://github.com/SajibHub",
+        demo: "https://weather.sajib.xyz/",
+      },
+      image: Weather,
+      featured: false,
+    },
+    {
+      title: "Unknown Wallet Telegram Bot",
+      description:
+        "A versatile Telegram bot that allows users to get their ID, check balance, set PIN, send money, view transaction history, and earn bonuses via referral. Supports sending money and sending messages seamlessly through the Telegram interface.",
+      tags: ["Telegram Bot", "Node.js", "Bot API", "Payment", "Referral System"],
+      links: {
+        demo: "https://t.me/unknow_wallet_bot",
+        github: null, // Add GitHub repo link if available
+      },
+      image: TelegramBot, // Add bot image or icon if available
+      featured: false,
+    },
   ];
+
 
   const location = useLocation()
 

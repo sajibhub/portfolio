@@ -8,14 +8,21 @@ const AboutMe = () => {
         <div className="content max-w-lg xl:w-2xl text-center md:text-left">
           <h2 className="text-[#4ECCA3] text-2xl font-bold mb-6">WHO I AM?</h2>
           <p className="text-lg leading-relaxed">
-            Hello! I’m Mohammad Sajib, a passionate Full-Stack Developer and Backend Specialist, with a focus on building scalable and robust web solutions. I specialize in technologies like{" "}
-            <a className="text-[#4ECCA3] px-2" href="https://reactjs.org/">React</a>,{" "}
-            <a className="text-[#4ECCA3] px-2" href="https://nodejs.org/en/">Node.js</a>,{" "}
-            <a className="text-[#4ECCA3] px-2" href="https://expressjs.com/">Express</a>, and{" "}
-            <a className="text-[#4ECCA3] px-2" href="https://www.mongodb.com/">MongoDB</a>. I also have extensive experience in <a className="text-[#4ECCA3] px-2" href="https://tailwindcss.com/">Tailwind CSS</a> and building efficient REST APIs.
-            I’m passionate about automating workflows and creating seamless development processes. Currently, I’m focused on expanding my skills in DevOps and cloud engineering to deliver more efficient and scalable applications.
-            I'm always seeking opportunities to contribute to the open-source community and to help others by sharing knowledge and creating innovative tools for developers.
-          </p>
+            Hey! I’m Mohammad Sajib — a dedicated <strong>Backend Developer</strong> with a strong focus on performance, scalability, and real-time functionality. I specialize in building powerful APIs, structuring reliable databases, and creating seamless backend systems.
+            <br /><br />
+            My main tech stack includes:{" "}
+            <a className="text-[#4ECCA3] px-1" href="https://nodejs.org/en/">Node.js</a>,{" "}
+            <a className="text-[#4ECCA3] px-1" href="https://expressjs.com/">Express</a>,{" "}
+            <a className="text-[#4ECCA3] px-1" href="https://www.mongodb.com/">MongoDB</a>,{" "}
+            <a className="text-[#4ECCA3] px-1" href="https://mongoosejs.com/">Mongoose</a>,{" "}
+            <a className="text-[#4ECCA3] px-1" href="https://firebase.google.com/">Firebase</a>, and{" "}
+            <a className="text-[#4ECCA3] px-1" href="https://socket.io/">Socket.IO</a>.
+            I also work with{" "}
+            <a className="text-[#4ECCA3] px-1" href="https://reactjs.org/">React</a> and{" "}
+            <a className="text-[#4ECCA3] px-1" href="https://tailwindcss.com/">Tailwind CSS</a> when needed.
+            <br /><br />
+            I'm passionate about <strong>real-time applications</strong>, <strong>API design</strong>, <strong>authentication systems</strong>, and <strong>transaction-safe backend architectures</strong>. I love solving complex logic problems, optimizing queries, and ensuring data integrity.
+            </p>
         </div>
         <div className="image-container flex justify-center md:justify-start mt-8 md:mt-0">
           <img

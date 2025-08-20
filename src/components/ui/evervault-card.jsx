@@ -1,101 +1,225 @@
-"use client";
-import { useMotionValue } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import { useMotionTemplate, motion } from "framer-motion";
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-export const EvervaultCard = ({ text, className }) => {
-  let mouseX = useMotionValue(0);
-  let mouseY = useMotionValue(0);
-
-  const [randomString, setRandomString] = useState("");
-
-  useEffect(() => {
-    let str = generateRandomString(1500);
-    setRandomString(str);
-  }, []);
-
-  function onMouseMove({ currentTarget, clientX, clientY }) {
-    let { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-
-    const str = generateRandomString(1500);
-    setRandomString(str);
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-md hover:-translate-y-0.5",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-md hover:-translate-y-0.5",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-sm",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-sm",
+        ghost: "hover:bg-accent hover:text-accent-foreground hover:shadow-sm",
+        link: "text-primary underline-offset-4 hover:underline",
+        gradient: "bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-blue-700 hover:to-cyan-600 hover:shadow-lg hover:-translate-y-0.5",
+        glow: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20",
+        neon: "border-2 border-cyan-400 text-cyan-400 bg-transparent hover:bg-cyan-400/10 hover:shadow-lg hover:shadow-cyan-400/30",
+        pill: "bg-primary text-primary-foreground hover:bg-primary/90 rounded-full hover:shadow-md",
+        success: "bg-green-600 text-white hover:bg-green-700 hover:shadow-md hover:-translate-y-0.5",
+        warning: "bg-yellow-500 text-white hover:bg-yellow-600 hover:shadow-md hover:-translate-y-0.5",
+        danger: "bg-red-600 text-white hover:bg-red-700 hover:shadow-md hover:-translate-y-0.5",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10 rounded-full",
+        xl: "h-12 rounded-lg px-10",
+        xs: "h-8 rounded px-2 text-xs",
+      },
+      fullWidth: {
+        true: "w-full",
+        false: "w-auto",
+      },
+      loading: {
+        true: "cursor-not-allowed opacity-70",
+        false: "",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+      fullWidth: false,
+      loading: false,
+    },
   }
+);
+
+const Button = React.forwardRef(({ 
+  className, 
+  variant, 
+  size, 
+  asChild = false, 
+  fullWidth = false,
+  loading = false,
+  leftIcon,
+  rightIcon,
+  children,
+  ...props 
+}, ref) => {
+  const Comp = asChild ? Slot : "button";
+  
+  return (
+    <Comp
+      className={cn(
+        buttonVariants({ variant, size, fullWidth, loading, className }),
+        loading && "relative"
+      )}
+      ref={ref}
+      disabled={loading}
+      {...props}
+    >
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg className="animate-spin h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </div>
+      )}
+      
+      <span className={loading ? "invisible" : "visible flex items-center gap-2"}>
+        {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
+        {children}
+        {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
+      </span>
+    </Comp>
+  );
+});
+
+Button.displayName = "Button";
+
+// Enhanced Button with additional features
+const EnhancedButton = React.forwardRef(({ 
+  className,
+  variant = "default",
+  size = "default",
+  asChild = false,
+  fullWidth = false,
+  loading = false,
+  leftIcon,
+  rightIcon,
+  ripple = false,
+  pulse = false,
+  badge,
+  children,
+  onClick,
+  ...props 
+}, ref) => {
+  const [ripples, setRipples] = React.useState([]);
+  const buttonRef = React.useRef(null);
+  
+  const handleClick = React.useCallback((e) => {
+    if (ripple && buttonRef.current && !loading) {
+      const button = buttonRef.current;
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      const newRipple = {
+        x,
+        y,
+        size,
+        id: Date.now()
+      };
+      
+      setRipples([...ripples, newRipple]);
+      
+      setTimeout(() => {
+        setRipples(prev => prev.filter(r => r.id !== newRipple.id));
+      }, 600);
+    }
+    
+    if (onClick) onClick(e);
+  }, [ripples, ripple, loading, onClick]);
 
   return (
-    <div
+    <Button
+      ref={(node) => {
+        buttonRef.current = node;
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      }}
       className={cn(
-        "p-0.5  bg-transparent aspect-square  flex items-center justify-center w-full h-full relative",
+        "relative overflow-hidden",
+        pulse && "animate-pulse",
         className
       )}
+      variant={variant}
+      size={size}
+      asChild={asChild}
+      fullWidth={fullWidth}
+      loading={loading}
+      leftIcon={leftIcon}
+      rightIcon={rightIcon}
+      onClick={handleClick}
+      {...props}
     >
-      <div
-        onMouseMove={onMouseMove}
-        className="group/card rounded-3xl w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full"
-      >
-        <CardPattern
-          mouseX={mouseX}
-          mouseY={mouseY}
-          randomString={randomString}
+      {/* Ripple Effect */}
+      {ripples.map(ripple => (
+        <span
+          key={ripple.id}
+          className="absolute block bg-white/30 rounded-full animate-ripple"
+          style={{
+            width: ripple.size,
+            height: ripple.size,
+            left: ripple.x,
+            top: ripple.y,
+          }}
         />
-        <div className="relative z-10 flex items-center justify-center">
-          <div className="relative h-44 w-44  rounded-full flex items-center justify-center text-white font-bold text-4xl">
-            <div className="absolute w-full h-full bg-white/[0.8] dark:bg-black/[0.8] blur-sm rounded-full" />
-            <span className="dark:text-white text-black z-20">{text}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+      ))}
+      
+      {/* Badge */}
+      {badge && !loading && (
+        <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 rounded-full bg-destructive text-xs text-white">
+          {badge}
+        </span>
+      )}
+      
+      {children}
+    </Button>
   );
-};
+});
 
-export function CardPattern({ mouseX, mouseY, randomString }) {
-  let maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`;
-  let style = { maskImage, WebkitMaskImage: maskImage };
+EnhancedButton.displayName = "EnhancedButton";
 
+// Group of buttons
+const ButtonGroup = React.forwardRef(({ 
+  className,
+  children,
+  orientation = "horizontal",
+  gap = 2,
+  ...props 
+}, ref) => {
   return (
-    <div className="pointer-events-none">
-      <div className="absolute inset-0 rounded-2xl  [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
-      <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500 to-blue-700 opacity-0  group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
-        style={style}
-      />
-      <motion.div
-        className="absolute inset-0 rounded-2xl opacity-0 mix-blend-overlay  group-hover/card:opacity-100"
-        style={style}
-      >
-        <p className="absolute inset-x-0 text-xs h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500">
-          {randomString}
-        </p>
-      </motion.div>
-    </div>
-  );
-}
-
-const characters =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-export const generateRandomString = (length) => {
-  let result = "";
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-};
-
-export const Icon = ({ className, ...rest }) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      className={className}
-      {...rest}
+    <div
+      ref={ref}
+      className={cn(
+        "flex",
+        {
+          "flex-row": orientation === "horizontal",
+          "flex-col": orientation === "vertical",
+        },
+        gap && `gap-${gap}`,
+        className
+      )}
+      {...props}
     >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
-    </svg>
+      {children}
+    </div>
   );
-};
+});
+
+ButtonGroup.displayName = "ButtonGroup";
+
+export { Button, EnhancedButton, ButtonGroup, buttonVariants };
